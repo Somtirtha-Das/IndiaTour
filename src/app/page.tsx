@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import {
@@ -22,72 +21,34 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 
-/** Uniform overlay opacity for every hero slide (text readability) */
-const HERO_OVERLAY_CLASS = "absolute inset-0 bg-black/55";
-
 const heroSlides = [
   {
-    id: "ram-mandir",
-    image:
-      "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1920&q=85&auto=format&fit=crop",
-    alt: "Ram Mandir temple architecture at Ayodhya",
-    title: "Ram Mandir",
-    tagline: "Witness divine grandeur reborn on the sacred Sarayu ghats",
-    region: "Ayodhya, Uttar Pradesh",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80",
+    label: "Himalayas",
   },
   {
-    id: "goa-beach",
-    image:
-      "https://images.unsplash.com/photo-1512343879784-a960bf10e773?w=1920&q=85&auto=format&fit=crop",
-    alt: "Palm-lined golden beach in Goa at sunset",
-    title: "Goa",
-    tagline: "Sun-kissed shores, Portuguese charm, and endless coastal rhythm",
-    region: "Goa",
+    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1920&q=80",
+    label: "Ram Mandir, Ayodhya",
   },
   {
-    id: "taj-mahal",
-    image:
-      "https://images.unsplash.com/photo-1564507592333-d60657eea5ab?w=1920&q=85&auto=format&fit=crop",
-    alt: "Taj Mahal marble mausoleum reflected at dawn",
-    title: "Taj Mahal",
-    tagline: "Marble poetry in moonlight — India's eternal monument of love",
-    region: "Agra, Uttar Pradesh",
+    image: "https://images.unsplash.com/photo-1602216057658-fb9b03d31fbe?w=1920&q=80",
+    label: "Kerala Backwaters",
   },
   {
-    id: "himalayas",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85&auto=format&fit=crop",
-    alt: "Snow-capped Himalayan mountain peaks above clouds",
-    title: "Himalayas",
-    tagline: "Summit silence, alpine air, and peaks that touch the heavens",
-    region: "Himachal Pradesh & Uttarakhand",
+    image: "https://images.unsplash.com/photo-1477587459743-5500bb8992c8?w=1920&q=80",
+    label: "Rajasthan Deserts",
   },
   {
-    id: "dal-lake",
-    image:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=85&auto=format&fit=crop",
-    alt: "Houseboats and shikaras on Dal Lake in Srinagar",
-    title: "Dal Lake",
-    tagline: "Shikara glides through mirror waters beneath Zabarwan peaks",
-    region: "Srinagar, Kashmir",
+    image: "https://images.unsplash.com/photo-1512343879784-a960bf10e773?w=1920&q=80",
+    label: "Goa Beaches",
   },
   {
-    id: "darjeeling",
-    image:
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1920&q=85&auto=format&fit=crop",
-    alt: "Tea gardens and misty hills of Darjeeling",
-    title: "Darjeeling",
-    tagline: "Emerald tea terraces, toy trains, and mist in the Eastern Himalayas",
-    region: "West Bengal",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80",
+    label: "Wildlife Safaris",
   },
   {
-    id: "kedarnath",
-    image:
-      "https://images.unsplash.com/photo-1605647546594-d7fd13f6062a?w=1920&q=85&auto=format&fit=crop",
-    alt: "Kedarnath temple nestled in the Garhwal Himalayas",
-    title: "Kedarnath",
-    tagline: "Ancient Shiva shrine cradled among towering Garhwal peaks",
-    region: "Uttarakhand",
+    image: "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=1920&q=80",
+    label: "Northeast Landscapes",
   },
 ];
 
@@ -103,63 +64,38 @@ const features = [
 ];
 
 export default function HomePage() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const currentSlide = heroSlides[activeSlide];
-
   return (
     <>
       <section className="relative h-screen min-h-[600px] overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
           effect="fade"
-          fadeEffect={{ crossFade: true }}
-          speed={1200}
-          autoplay={{ delay: 5500, disableOnInteraction: false }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           loop
-          className="hero-swiper h-full w-full"
-          onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
+          className="h-full w-full"
         >
-          {heroSlides.map((slide, index) => (
-            <SwiperSlide key={slide.id}>
+          {heroSlides.map((slide) => (
+            <SwiperSlide key={slide.label}>
               <div className="relative h-full w-full">
                 <Image
                   src={slide.image}
-                  alt={slide.alt}
+                  alt={slide.label}
                   fill
-                  priority={index === 0}
-                  quality={85}
-                  className="object-cover object-center"
+                  priority
+                  className="object-cover"
                   sizes="100vw"
                 />
-                <div className={HERO_OVERLAY_CLASS} aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-b from-yv-black/60 via-yv-black/50 to-yv-black" />
+                <span className="absolute bottom-32 left-8 rounded-full bg-black/40 px-4 py-1 text-sm backdrop-blur-sm">
+                  {slide.label}
+                </span>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-28 z-10 px-4 md:bottom-32 md:px-8 lg:px-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.55, ease: "easeOut" }}
-              className="max-w-xl text-left"
-            >
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-yv-gold md:text-sm">
-                {currentSlide.region}
-              </p>
-              <h2 className="mt-2 font-display text-3xl font-bold text-white md:text-5xl">
-                {currentSlide.title}
-              </h2>
-              <p className="mt-2 text-sm text-white/80 md:text-lg">{currentSlide.tagline}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pt-16 text-center pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto [&_input]:pointer-events-auto">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -210,7 +146,7 @@ export default function HomePage() {
           >
             <p className="text-xs text-white/50">AI Score</p>
             <p className="text-2xl font-bold text-yv-gold">98%</p>
-            <p className="text-xs text-white/50">{currentSlide.title} Match</p>
+            <p className="text-xs text-white/50">Ayodhya Match</p>
           </motion.div>
           <motion.div
             animate={{ y: [0, 12, 0] }}
