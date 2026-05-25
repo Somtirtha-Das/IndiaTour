@@ -65,7 +65,7 @@ export default function AIPlannerPage() {
                   { key: "interests", label: "Interests", icon: Sparkles, type: "text" },
                   { key: "duration", label: "Duration (days)", icon: Clock, type: "number" },
                   { key: "comfort", label: "Comfort Level", icon: Shield, type: "select", options: ["Budget", "Standard", "Premium", "Luxury"] },
-                  { key: "diet", label: "Dietary Preferences", icon: Leaf, type: "select", options: ["Any", "Vegetarian", "Vegan", "Halal", "Jain"] },
+                  { key: "diet", label: "Dietary Preferences", icon: Leaf, type: "select", options: ["Any", "Vegetarian", "Vegan", "Non-vegetarian"] },
                   { key: "accessibility", label: "Accessibility Needs", icon: Accessibility, type: "text" },
                 ].map((field) => (
                   <div key={field.key}>
