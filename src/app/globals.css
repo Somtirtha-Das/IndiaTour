@@ -42,6 +42,11 @@
   background: #d4af37 !important;
 }
 
+.hero-swiper .swiper-pagination {
+  z-index: 20;
+  bottom: 1.25rem !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
